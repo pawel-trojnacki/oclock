@@ -8,7 +8,7 @@ import {
   orderFormInitialState,
 } from '../constatns/orderForm';
 
-import { API_URL } from '../utils/urls';
+// import { API_URL } from '../utils/urls';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -66,7 +66,7 @@ export default () => {
       cart,
     };
 
-    const response = await axios.post(`${API_URL}/orders`, {
+    const response = await axios.post(`${process.env.API_URL}/orders`, {
       ...data,
     });
 
@@ -78,11 +78,14 @@ export default () => {
   useEffect(() => {
     const loadToken = async () => {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/orders/payment`, {
-        cart: cart.map(product => {
-          return { ...product, ...{ id: product.strapiId } };
-        }),
-      });
+      const response = await axios.post(
+        `${process.env.API_URL}/orders/payment`,
+        {
+          cart: cart.map(product => {
+            return { ...product, ...{ id: product.strapiId } };
+          }),
+        }
+      );
 
       console.log(response.data);
 
