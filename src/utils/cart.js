@@ -1,19 +1,19 @@
-export const saveCart = cart => {
-  if (typeof window !== undefined) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }
-};
+// export const saveCart = cart => {
+//   if (typeof window !== undefined) {
+//     localStorage.setItem('cart', JSON.stringify(cart));
+//   }
+// };
 
-export const getCart = () => {
-  let cart = [];
-  if (typeof window !== undefined) {
-    const isNotEmpty = localStorage.getItem('cart');
-    if (isNotEmpty) {
-      cart = JSON.parse(localStorage.getItem('cart'));
-    }
-  }
-  return cart;
-};
+// export const getCart = () => {
+//   let cart = [];
+//   if (typeof window !== undefined) {
+//     const isNotEmpty = localStorage.getItem('cart');
+//     if (isNotEmpty) {
+//       cart = JSON.parse(localStorage.getItem('cart'));
+//     }
+//   }
+//   return cart;
+// };
 
 export const cartTotal = cart => {
   let total = 0;

@@ -9,7 +9,7 @@ const ProductTemplate = ({
     product: { name, description, price_in_cents, image, id, strapiId },
   },
 }) => {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, cart } = useContext(CartContext);
 
   const numberPrice = Math.round(price_in_cents);
   return (
@@ -19,7 +19,7 @@ const ProductTemplate = ({
       <p>{`$${(price_in_cents / 100).toFixed(2)}`}</p>
       <Img fixed={image.childImageSharp.fixed} />
       <button
-        onClick={() =>
+        onClick={() => {
           addToCart({
             strapiId,
             id,
@@ -27,8 +27,9 @@ const ProductTemplate = ({
             description,
             price_in_cents: numberPrice,
             image,
-          })
-        }
+          });
+          console.log(cart);
+        }}
       >
         Add to cart
       </button>

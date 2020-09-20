@@ -1,22 +1,27 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
+import { Link } from 'gatsby';
 
 const Layout = ({ children }) => {
   const { cart } = useContext(CartContext);
-  const quantity = cart.reduce((prev, { quantity }) => {
-    return prev + quantity;
-  }, 0);
+  let quantity = 0;
+  if (cart && cart.length > 0) {
+    quantity = cart.reduce((prev, { quantity }) => {
+      return prev + quantity;
+    }, 0);
+  }
+
   return (
     <div>
       <nav>
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="/shop">Shop</a>
+          <Link to="/shop">Shop</Link>
         </li>
         <li>
-          <a href="/cart">Cart</a>
+          <Link to="/cart">Cart</Link>
           {quantity}
         </li>
       </nav>
