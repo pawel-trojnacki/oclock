@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useCallback, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 // import { CartContext } from '../context/CartContext';
@@ -16,6 +16,7 @@ const ProductTemplate = ({
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const numberPrice = Math.round(price_in_cents);
+
   return (
     <Layout productPage shopPage>
       <h1>{name}</h1>
