@@ -1,12 +1,14 @@
+const windowGlobal = typeof window !== 'undefined' && window;
+
 export const saveCart = cart => {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  windowGlobal.localStorage.setItem('cart', JSON.stringify(cart));
 };
 
 export const getCart = () => {
   let cart = [];
-  const isNotEmpty = localStorage.getItem('cart');
+  const isNotEmpty = windowGlobal.localStorage.getItem('cart');
   if (isNotEmpty) {
-    cart = JSON.parse(localStorage.getItem('cart'));
+    cart = JSON.parse(windowGlobal.localStorage.getItem('cart'));
   }
   return cart;
 };
