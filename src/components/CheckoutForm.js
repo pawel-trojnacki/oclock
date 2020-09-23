@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-import { CartContext } from '../context/CartContext';
+// import { CartContext } from '../context/CartContext';
+import { getCart, clearCart } from '../utils/cart';
 import {
   orderFormElements,
   orderFormInitialState,
@@ -30,12 +31,16 @@ export default () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { cart, clearCart } = useContext(CartContext);
+  // const { cart, clearCart } = useContext(CartContext);
+  const cart = getCart();
 
   const [token, setToken] = useState(null);
   const [total, setTotal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   const [form, setForm] = useState(orderFormInitialState);
 
@@ -96,7 +101,8 @@ export default () => {
     };
 
     loadToken();
-  }, [cart]);
+    forceUpdate();
+  }, []);
 
   return (
     <div>

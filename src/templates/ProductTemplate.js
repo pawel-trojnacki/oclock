@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import { CartContext } from '../context/CartContext';
+// import { CartContext } from '../context/CartContext';
 import Layout from '../components/Layout/Layout';
+import { updateCart } from '../utils/cart';
 
 const ProductTemplate = ({
   data: {
     product: { name, description, price_in_cents, image, id, strapiId },
   },
 }) => {
-  const { addToCart, cart } = useContext(CartContext);
+  // const { addToCart, cart } = useContext(CartContext);
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   const numberPrice = Math.round(price_in_cents);
   return (
@@ -20,7 +24,7 @@ const ProductTemplate = ({
       <Img fixed={image.childImageSharp.fixed} />
       <button
         onClick={() => {
-          addToCart({
+          updateCart({
             strapiId,
             id,
             name,
@@ -28,7 +32,7 @@ const ProductTemplate = ({
             price_in_cents: numberPrice,
             image,
           });
-          console.log(cart);
+          forceUpdate();
         }}
       >
         Add to cart
