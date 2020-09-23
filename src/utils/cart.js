@@ -6,10 +6,13 @@ export const saveCart = cart => {
 
 export const getCart = () => {
   let cart = [];
-  const isNotEmpty = windowGlobal.localStorage.getItem('cart');
-  if (isNotEmpty) {
-    cart = JSON.parse(windowGlobal.localStorage.getItem('cart'));
+  if (windowGlobal) {
+    const isNotEmpty = windowGlobal.localStorage.getItem('cart');
+    if (isNotEmpty) {
+      cart = JSON.parse(windowGlobal.localStorage.getItem('cart'));
+    }
   }
+
   return cart;
 };
 
