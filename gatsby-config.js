@@ -46,5 +46,17 @@ module.exports = {
         // },
       },
     },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Cardo`,
+            subsets: [`latin`],
+            variants: [`400`, `700`],
+          },
+        ],
+      },
+    },
   ],
 };

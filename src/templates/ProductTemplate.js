@@ -13,7 +13,7 @@ const ProductTemplate = ({
 
   const numberPrice = Math.round(price_in_cents);
   return (
-    <Layout>
+    <Layout productPage shopPage>
       <h1>{name}</h1>
       <p>{description}</p>
       <p>{`$${(price_in_cents / 100).toFixed(2)}`}</p>
