@@ -4,10 +4,13 @@ export const saveCart = cart => {
 
 export const getCart = () => {
   let cart = [];
-  const isNotEmpty = localStorage.getItem('cart');
-  if (isNotEmpty) {
-    cart = JSON.parse(localStorage.getItem('cart'));
+  if (typeof window !== `undefined`) {
+    const isNotEmpty = localStorage.getItem('cart');
+    if (isNotEmpty) {
+      cart = JSON.parse(localStorage.getItem('cart'));
+    }
   }
+
   return cart;
 };
 
