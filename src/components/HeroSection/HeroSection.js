@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useViewportScroll, useTransform } from 'framer-motion';
+import React from 'react';
+// import { useViewportScroll, useTransform } from 'framer-motion';
 
 import {
   HeroWrapper,
@@ -13,8 +13,9 @@ import Img from '../../images/header-image.jpg';
 import Scroll from '../Scroll/Scroll';
 
 const HeroSection = () => {
-  const { scrollYProgress } = useViewportScroll();
-  const scaleSize = useTransform(scrollYProgress, [0, 0.3], [1, 1.3]);
+  // const { scrollYProgress } = useViewportScroll();
+  // const scaleSize = useTransform(scrollYProgress, [0, 0.3], [1, 1.3]);
+
   //   const [scaleImg, setScaleImg] = useState(1);
   //   useEffect(() => {
   //     const handleScroll = () => {

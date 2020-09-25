@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const Paragraph = styled.p`
   font-size: ${({ theme }) => theme.xs};
   line-height: ${({ theme }) => theme.lineHeightM};
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme, black }) => (black ? theme.black : theme.white)};
   margin: ${({ margin }) => margin || '10px'};
   text-align: ${({ justify }) => justify || 'left'};
   text-transform: ${({ uppercase }) => uppercase || 'none'};
