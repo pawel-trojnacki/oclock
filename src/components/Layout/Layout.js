@@ -12,7 +12,9 @@ const Layout = ({ children, productPage, shopPage }) => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Navbar productPage={productPage} shopPage={shopPage} />
-        <ScrollWrapper horizontal={shopPage}>{children}</ScrollWrapper>
+        {/* <ScrollWrapper horizontal={shopPage}> */}
+        {children}
+        {/* </ScrollWrapper> */}
       </ThemeProvider>
     </>
   );

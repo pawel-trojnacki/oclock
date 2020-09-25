@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-// import { CartContext } from '../context/CartContext';
-import { getCart, clearCart } from '../utils/cart';
+import { CartContext } from '../context/CartContext';
+// import { getCart, clearCart } from '../utils/cart';
 import {
   orderFormElements,
   orderFormInitialState,
@@ -31,8 +31,8 @@ export default () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  // const { cart, clearCart } = useContext(CartContext);
-  const cart = getCart();
+  const { cart, clearCart } = useContext(CartContext);
+  // const cart = getCart();
 
   const [token, setToken] = useState(null);
   const [total, setTotal] = useState(null);
@@ -69,12 +69,9 @@ export default () => {
       cart,
     };
 
-    const response = await axios.post(
-      `https://oclock-backend.herokuapp.com/orders`,
-      {
-        ...data,
-      }
-    );
+    const response = await axios.post(`http://localhost:1337/orders`, {
+      ...data,
+    });
 
     setLoading(false);
     setSuccess(true);
@@ -85,7 +82,7 @@ export default () => {
     const loadToken = async () => {
       setLoading(true);
       const response = await axios.post(
-        `https://oclock-backend.herokuapp.com/orders/payment`,
+        `http://localhost:1337/orders/payment`,
         {
           cart: cart.map(product => {
             return { ...product, ...{ id: product.strapiId } };

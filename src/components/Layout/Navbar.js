@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 // import { Link } from 'gatsby';
 
-// import { CartContext } from '../../context/CartContext';
-import { getCart } from '../../utils/cart';
+import { CartContext } from '../../context/CartContext';
+// import { getCart } from '../../utils/cart';
 import {
   NavWrapper,
   Nav,
@@ -14,8 +14,8 @@ import {
 import Arrow from '../Icons/Arrow';
 
 const Navbar = ({ productPage, shopPage }) => {
-  // const { cart } = useContext(CartContext);
-  const cart = getCart();
+  const { cart } = useContext(CartContext);
+  // const cart = getCart();
   let quantity = 0;
   if (cart && cart.length > 0) {
     quantity = cart.reduce((prev, { quantity }) => {
