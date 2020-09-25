@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import GlobalStyle from '../../theme/GlobalStyle';
 import { theme } from '../../theme/theme';
@@ -21,3 +22,11 @@ const Layout = ({ children, productPage, shopPage }) => {
 };
 
 export default Layout;
+
+const { oneOfType, arrayOf, node, bool } = PropTypes;
+
+Layout.propTypes = {
+  children: oneOfType([arrayOf(node), node]),
+  productPage: bool,
+  shopPage: bool,
+};

@@ -1,11 +1,12 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import useWindowSize from '../../hooks/useWindowSize';
 import { PageWrapper, StyledScrollWrapper } from './ScrollWrapperStyles';
 
 const ScrollWrapper = ({ children, horizontal }) => {
   const size = useWindowSize();
   const page = useRef(null);
-  //   const scrollContainer = useRef(null);
 
   useEffect(() => {
     const scrollContainer = document.querySelector('.scroll-container');
@@ -48,6 +49,13 @@ const ScrollWrapper = ({ children, horizontal }) => {
       </StyledScrollWrapper>
     </PageWrapper>
   );
+};
+
+const { oneOfType, arrayOf, node, bool } = PropTypes;
+
+ScrollWrapper.propTypes = {
+  children: oneOfType([arrayOf(node), node]),
+  horizontal: bool,
 };
 
 export default ScrollWrapper;

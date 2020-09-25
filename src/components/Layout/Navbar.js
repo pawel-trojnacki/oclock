@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 // import { Link } from 'gatsby';
 
 import { CartContext } from '../../context/CartContext';
-// import { getCart } from '../../utils/cart';
 import {
   NavWrapper,
   Nav,
@@ -78,3 +78,9 @@ const Navbar = ({ productPage, shopPage }) => {
 };
 
 export default Navbar;
+
+const { bool } = PropTypes;
+Navbar.propTypes = {
+  productPage: bool,
+  shopPage: bool,
+};

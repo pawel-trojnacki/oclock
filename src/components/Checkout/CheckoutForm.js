@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import {
+  CountryDropdown,
+  RegionDropdown,
+  // CountryRegionData,
+} from 'react-country-region-selector';
 import axios from 'axios';
 
-import { CartContext } from '../context/CartContext';
-// import { getCart, clearCart } from '../utils/cart';
+import { CartContext } from '../../context/CartContext';
 import {
   orderFormElements,
   orderFormInitialState,
-} from '../constatns/orderForm';
+} from '../../constatns/orderForm';
+import { validateForm } from '../../utils/validateForm';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -27,12 +32,11 @@ const CARD_ELEMENT_OPTIONS = {
   },
 };
 
-export default () => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
   const { cart, clearCart } = useContext(CartContext);
-  // const cart = getCart();
 
   const [token, setToken] = useState(null);
   const [total, setTotal] = useState(null);
@@ -43,15 +47,23 @@ export default () => {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [form, setForm] = useState(orderFormInitialState);
+  const [error, setError] = useState(null);
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError(null);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     if (!stripe || !elements) {
+      return;
+    }
+
+    const errorMessage = validateForm(form);
+    if (errorMessage) {
+      setError(errorMessage);
       return;
     }
 
@@ -69,7 +81,7 @@ export default () => {
       cart,
     };
 
-    const response = await axios.post(`http://localhost:1337/orders`, {
+    const response = await axios.post(`${process.env.GATSBY_API_URL}/orders`, {
       ...data,
     });
 
@@ -82,7 +94,7 @@ export default () => {
     const loadToken = async () => {
       setLoading(true);
       const response = await axios.post(
-        `http://localhost:1337/orders/payment`,
+        `${process.env.GATSBY_API_URL}/orders/payment`,
         {
           cart: cart.map(product => {
             return { ...product, ...{ id: product.strapiId } };
@@ -117,21 +129,50 @@ export default () => {
             return (
               <p key={field}>
                 <label htmlFor={field}>{name}</label>
-                <input
-                  type={type}
-                  name={field}
-                  id={field}
-                  value={form[field]}
-                  onChange={handleChange}
-                />
+                {name !== 'country' && name !== 'state' && (
+                  <input
+                    type={type}
+                    name={field}
+                    id={field}
+                    value={form[field]}
+                    onChange={handleChange}
+                  />
+                )}
+                {name === 'country' && (
+                  <CountryDropdown
+                    id={field}
+                    name={field}
+                    value={form[field]}
+                    onChange={value => {
+                      setForm({ ...form, shipping_country: value });
+                      setError(null);
+                    }}
+                  />
+                )}
+                {name === 'state' && (
+                  <RegionDropdown
+                    id={field}
+                    name={field}
+                    defaultOptionLabel="Select state"
+                    country={form.shipping_country}
+                    value={form[field]}
+                    onChange={value => {
+                      setForm({ ...form, shipping_state: value });
+                      setError(null);
+                    }}
+                  />
+                )}
               </p>
             );
           })}
           {/* card field */}
           <CardElement options={CARD_ELEMENT_OPTIONS} />
           <button disabled={!stripe}>Confirm order</button>
+          {error && <h2>{error}</h2>}
         </form>
       )}
     </div>
   );
 };
+
+export default CheckoutForm;

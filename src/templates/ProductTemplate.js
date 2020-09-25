@@ -1,19 +1,17 @@
-import React, { useContext, useState, useCallback, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import PropTypes from 'prop-types';
+
 import { CartContext } from '../context/CartContext';
 import Layout from '../components/Layout/Layout';
-// import { updateCart } from '../utils/cart';
 
 const ProductTemplate = ({
   data: {
     product: { name, description, price_in_cents, image, id, strapiId },
   },
 }) => {
-  const { addToCart, cart } = useContext(CartContext);
-
-  // const [, updateState] = useState();
-  // const forceUpdate = useCallback(() => updateState({}), []);
+  const { addToCart } = useContext(CartContext);
 
   const numberPrice = Math.round(price_in_cents);
 
@@ -33,7 +31,6 @@ const ProductTemplate = ({
             price_in_cents: numberPrice,
             image,
           });
-          // forceUpdate();
         }}
       >
         Add to cart
@@ -62,3 +59,11 @@ export const query = graphql`
 `;
 
 export default ProductTemplate;
+
+const { array } = PropTypes;
+ProductTemplate.propTypes = {
+  product: array.isRequired,
+};
+ProductTemplate.defaultProps = {
+  product: [],
+};

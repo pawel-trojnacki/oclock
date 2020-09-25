@@ -3,14 +3,12 @@ import Img from 'gatsby-image';
 
 import SEO from '../components/seo';
 import Layout from '../components/Layout/Layout';
-// import { cartTotal, updateCart, getCart } from '../utils/cart';
 import { cartTotal } from '../utils/cart';
 import { CartContext } from '../context/CartContext';
-import Checkout from '../components/Checkout';
+import Checkout from '../components/Checkout/Checkout';
 
 const CartPage = () => {
   const { cart, addToCart } = useContext(CartContext);
-  // const cart = getCart();
   const totalPrice = cartTotal(cart);
 
   const [, updateState] = useState();
@@ -30,23 +28,23 @@ const CartPage = () => {
                   <h2>{product.name}</h2>
                   <p>
                     Quantity:
-                    <span
+                    <button
                       onClick={() => {
                         addToCart(product, -1);
                         forceUpdate();
                       }}
                     >
                       -
-                    </span>
+                    </button>
                     <span>{product.quantity}</span>
-                    <span
+                    <button
                       onClick={() => {
                         addToCart(product, 1);
                         forceUpdate();
                       }}
                     >
                       +
-                    </span>
+                    </button>
                   </p>
                   <p>{`$${price}`}</p>
                   <Img fixed={product.image.childImageSharp.fixed} />

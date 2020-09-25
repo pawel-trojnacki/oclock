@@ -14,23 +14,6 @@ export const getCart = () => {
   return cart;
 };
 
-export const updateCart = (product, quantity = 1) => {
-  const cart = getCart();
-  const productId = cart.findIndex(
-    element => element.strapiId === product.strapiId
-  );
-  if (productId > -1) {
-    cart[productId].quantity += quantity;
-    if (cart[productId].quantity === 0) {
-      cart.splice(productId, 1);
-    }
-    saveCart(cart);
-  } else {
-    product.quantity = quantity;
-    saveCart([...cart, product]);
-  }
-};
-
 export const cartTotal = cart => {
   let total = 0;
   if (cart) {
@@ -44,3 +27,20 @@ export const cartTotal = cart => {
 export const clearCart = () => {
   saveCart([]);
 };
+
+// export const updateCart = (product, quantity = 1) => {
+//   const cart = getCart();
+//   const productId = cart.findIndex(
+//     element => element.strapiId === product.strapiId
+//   );
+//   if (productId > -1) {
+//     cart[productId].quantity += quantity;
+//     if (cart[productId].quantity === 0) {
+//       cart.splice(productId, 1);
+//     }
+//     saveCart(cart);
+//   } else {
+//     product.quantity = quantity;
+//     saveCart([...cart, product]);
+//   }
+// };

@@ -34,7 +34,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.API_URL,
+        apiURL: process.env.GATSBY_API_URL,
         queryLimit: 10000, // Default to 100
         contentTypes: [`product`],
         //If using single types place them in this array.
