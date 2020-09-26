@@ -3,11 +3,16 @@ import React from 'react';
 import SEO from '../components/seo';
 import Layout from '../components/Layout/Layout';
 import HeroSection from '../components/HeroSection/HeroSection';
+import SubHeader from '../components/SubHeader/SubHeader';
+import Divider from '../components/Image/Divider';
+import DividerImg from '../images/divider.jpg';
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    {/* <HeroSection /> */}
+    <HeroSection />
+    <SubHeader />
+    <Divider src={DividerImg} alt="elegant watch" />
     <div
       style={{
         width: '100vw',

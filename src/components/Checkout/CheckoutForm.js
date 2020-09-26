@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import {
-  CountryDropdown,
-  RegionDropdown,
-  // CountryRegionData,
-} from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import axios from 'axios';
 
 import { CartContext } from '../../context/CartContext';

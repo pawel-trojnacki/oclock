@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 export const NavWrapper = styled(motion.div)`
   width: 100%;
@@ -21,28 +22,13 @@ export const Nav = styled.nav`
 
 export const ListItem = styled(motion.li)`
   list-style: none;
-  /* a {
-    transition: all 0.3s;
-  }
-  :hover {
-    a {
-      transform: translateY(2px);
-      transition: all 0.3s;
-    }
-  } */
 `;
 
 export const ListItemFirst = styled(ListItem)`
   margin: 0 auto 0 0;
-
-  /* :hover {
-    a {
-      transform: none;
-    } 
-  }*/
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(AniLink)`
   display: inline-block;
   text-decoration: none;
   color: ${({ theme }) => theme.white};

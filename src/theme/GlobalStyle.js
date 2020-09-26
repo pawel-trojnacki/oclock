@@ -12,17 +12,21 @@ ${css`
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    /* min-height: 200vh; */
     margin: 0;
     padding: 0;
     font-family: 'Cardo', serif;
     font-weight: 400;
     overscroll-behavior-y: none;
+    background-color: #000;
   }
 
   html,
   body {
     height: 100%;
+  }
+
+  ::selection {
+    background-color: #444;
   }
 `}`;
 

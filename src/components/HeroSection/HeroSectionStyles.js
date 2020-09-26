@@ -52,8 +52,3 @@ export const ImageOverlay = styled(motion.div)`
   background-color: ${({ theme }) => theme.black};
   transform-origin: right;
 `;
-
-export const HeadingSpan = styled(motion.span)`
-  display: block;
-  position: relative;
-`;

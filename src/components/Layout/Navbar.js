@@ -14,8 +14,10 @@ import {
 import Arrow from '../Icons/Arrow';
 
 const Navbar = ({ productPage, shopPage }) => {
+  const transitionBg = '#1a1a1a';
+  const transitionDuration = 2;
+
   const { cart } = useContext(CartContext);
-  // const cart = getCart();
   let quantity = 0;
   if (cart && cart.length > 0) {
     quantity = cart.reduce((prev, { quantity }) => {
@@ -50,24 +52,60 @@ const Navbar = ({ productPage, shopPage }) => {
       <Nav>
         {productPage ? (
           <ListItemFirst whileHover={{ x: -6 }} transition={{ duration: 0.3 }}>
-            <NavLink to="/shop">
+            <NavLink
+              to="/shop"
+              cover
+              bg={transitionBg}
+              direction="right"
+              duration={transitionDuration}
+            >
               <Arrow />
             </NavLink>
           </ListItemFirst>
         ) : (
           <ListItemFirst>
-            <NavLink to="/">O'clock</NavLink>
+            <NavLink
+              to="/"
+              cover
+              bg={transitionBg}
+              direction="down"
+              duration={transitionDuration}
+            >
+              O'clock
+            </NavLink>
           </ListItemFirst>
         )}
         <ListItem>
           {shopPage ? (
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              cover
+              bg={transitionBg}
+              direction="down"
+              duration={transitionDuration}
+            >
+              Home
+            </NavLink>
           ) : (
-            <NavLink to="/shop">Shop</NavLink>
+            <NavLink
+              to="/shop"
+              cover
+              bg={transitionBg}
+              direction="up"
+              duration={transitionDuration}
+            >
+              Shop
+            </NavLink>
           )}
         </ListItem>
         <ListItem>
-          <NavLink to="/cart">
+          <NavLink
+            to="/cart"
+            cover
+            bg={transitionBg}
+            direction="left"
+            duration={transitionDuration}
+          >
             Cart
             <Quantity>{quantity > 0 && quantity}</Quantity>
           </NavLink>

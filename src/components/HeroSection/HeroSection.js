@@ -1,36 +1,73 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 // import { useViewportScroll, useTransform } from 'framer-motion';
+import Fade from 'react-reveal/Fade';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import {
   HeroWrapper,
   HeroImageWrapper,
   HeroImage,
   ImageOverlay,
-  HeadingSpan,
 } from './HeroSectionStyles';
 import Heading from '../Heading/Heading';
 import Img from '../../images/header-image.jpg';
 import Scroll from '../Scroll/Scroll';
+import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
+
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
 
 const HeroSection = () => {
-  // const { scrollYProgress } = useViewportScroll();
-  // const scaleSize = useTransform(scrollYProgress, [0, 0.3], [1, 1.3]);
+  const heroImg = useRef(null);
+  const heroTitle = useRef(null);
 
-  //   const [scaleImg, setScaleImg] = useState(1);
-  //   useEffect(() => {
-  //     const handleScroll = () => {
-  //       setScaleImg(() => 1 + window.scrollY / 1000);
-  //     };
-  //     window.addEventListener('scroll', handleScroll);
-  //     return () => {
-  //       window.removeEventListener('scroll', handleScroll);
-  //     };
-  //   }, [scaleImg]);
+  useEffect(() => {
+    document.body.style.overflowY = 'hidden';
+    setTimeout(() => {
+      document.body.style.overflowY = 'scroll';
+    }, 2500);
+  }, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      heroImg.current,
+      { opacity: 1 },
+      {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: heroImg.current,
+          ...scrollTriggerProperties,
+          start: 'center center',
+        },
+      }
+    );
+  }, [heroImg]);
+
+  useEffect(() => {
+    gsap.fromTo(
+      heroTitle.current,
+      { yPercent: 0 },
+      {
+        yPercent: -50,
+        scrollTrigger: {
+          trigger: heroTitle.current,
+          ...scrollTriggerProperties,
+          start: 'center center',
+        },
+      }
+    );
+  }, [heroTitle]);
+
   return (
     <HeroWrapper>
       <HeroImageWrapper>
         <HeroImage
+          ref={heroImg}
           src={Img}
+          alt="man with a watch on his wrist"
           initial={{ x: '-20%' }}
           animate={{ x: 0 }}
           transition={{ delay: 1.2, duration: 0.6, ease: 'easeInOut' }}
@@ -41,21 +78,9 @@ const HeroSection = () => {
           transition={{ delay: 1.2, duration: 0.6, ease: 'easeInOut' }}
         />
       </HeroImageWrapper>
-      <Heading big zi="1" blend="difference">
-        <HeadingSpan
-          initial={{ opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0, duration: 0.8 }}
-        >
-          Luxury
-        </HeadingSpan>
-        <HeadingSpan
-          initial={{ opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
-          on your wrist
-        </HeadingSpan>
+      <Heading ref={heroTitle} bold big zi="1" blend="difference">
+        <Fade cascade>Luxury</Fade>
+        <Fade cascade>on your wrist</Fade>
       </Heading>
       <Scroll />
     </HeroWrapper>

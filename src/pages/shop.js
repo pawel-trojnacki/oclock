@@ -28,7 +28,7 @@ const ShopPage = () => {
     `
   );
   return (
-    <Layout shopPage>
+    <Layout shopPage horizontal>
       <SEO title="Shop" />
       <div>Shoppage</div>
       <ul>
