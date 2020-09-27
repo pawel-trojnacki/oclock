@@ -2,10 +2,11 @@ import React from 'react';
 
 import SEO from '../components/seo';
 import Layout from '../components/Layout/Layout';
-import HeroSection from '../components/HeroSection/HeroSection';
-import SubHeader from '../components/SubHeader/SubHeader';
+import HeroSection from '../sections/HeroSection/HeroSection';
+import SubHeader from '../sections/SubHeader/SubHeader';
 import Divider from '../components/Image/Divider';
 import DividerImg from '../images/divider.jpg';
+import AboutSection from '../sections/AboutSection/AboutSection';
 
 const IndexPage = () => (
   <Layout>
@@ -13,6 +14,7 @@ const IndexPage = () => (
     <HeroSection />
     <SubHeader />
     <Divider src={DividerImg} alt="elegant watch" />
+    <AboutSection />
     <div
       style={{
         width: '100vw',

@@ -16,7 +16,16 @@ if (typeof window !== `undefined`) {
   gsap.core.globals('ScrollTrigger', ScrollTrigger);
 }
 
-const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
+const ResizeImage = ({
+  src,
+  alt,
+  left,
+  secondary,
+  withoutLetter,
+  letter,
+  last,
+  transform,
+}) => {
   const resizeImg = useRef(null);
 
   useEffect(() => {
@@ -35,15 +44,9 @@ const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
   }, [resizeImg]);
 
   return (
-    <ImageWrapper>
+    <ImageWrapper left={left} secondary={secondary} transform={transform}>
       <InnerWrapper>
-        <StyledResizeImage
-          src={src}
-          alt={alt || 'image'}
-          left={left}
-          secondary={secondary}
-          ref={resizeImg}
-        />
+        <StyledResizeImage src={src} alt={alt || 'image'} ref={resizeImg} />
       </InnerWrapper>
       {!withoutLetter && <Letter left={left} letter={letter} />}
     </ImageWrapper>

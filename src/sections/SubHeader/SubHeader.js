@@ -1,10 +1,10 @@
 import React from 'react';
 import Fade from 'react-reveal/Fade';
-import ResizeImage from '../Image/ResizeImage';
+import ResizeImage from '../../components/Image/ResizeImage';
 import { Wrapper, InnerWrapper, TextWrapper } from './SubHeaderStyles';
 import Img1 from '../../images/about/about-2.jpg';
 import Img2 from '../../images/about/about-1.jpg';
-import Heading from '../Heading/Heading';
+import Heading from '../../components/Heading/Heading';
 
 const SubHeader = () => {
   return (

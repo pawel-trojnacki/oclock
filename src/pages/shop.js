@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/seo';
@@ -27,6 +27,13 @@ const ShopPage = () => {
       }
     `
   );
+
+  // const [, updateState] = useState();
+  // const forceUpdate = useCallback(() => updateState({}), []);
+
+  // useEffect(() => {
+  //   forceUpdate();
+  // }, []);
   return (
     <Layout shopPage horizontal>
       <SEO title="Shop" />

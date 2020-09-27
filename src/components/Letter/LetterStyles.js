@@ -9,13 +9,13 @@ export const LetterWrapper = styled.div`
   align-items: center;
   height: 100%;
   top: 0;
-  left: -60px;
+  left: -45px;
 
   ${({ left }) =>
     left &&
     css`
       left: auto;
-      right: -60px;
+      right: -45px;
     `}
 `;
 

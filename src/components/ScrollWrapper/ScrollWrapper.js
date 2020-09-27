@@ -15,7 +15,7 @@ const ScrollWrapper = ({ children, horizontal }) => {
         ? scrollContainer.getBoundingClientRect().width
         : scrollContainer.getBoundingClientRect().height
     }px`;
-  }, [size.height]);
+  }, [size]);
 
   useEffect(() => {
     requestAnimationFrame(() => smoothScrolling());
@@ -36,9 +36,10 @@ const ScrollWrapper = ({ children, horizontal }) => {
       (smoothConfigs.current - smoothConfigs.previous) * smoothConfigs.ease;
     smoothConfigs.smooth = Math.round(smoothConfigs.previous * 100) / 100;
 
-    scrollContainer.style.transform = horizontal
-      ? `translateX(-${smoothConfigs.smooth}px)`
-      : `translateY(-${smoothConfigs.smooth}px)`;
+    scrollContainer.style.transform =
+      window.location.pathname === '/shop'
+        ? `translateX(-${smoothConfigs.smooth}px)`
+        : `translateY(-${smoothConfigs.smooth}px)`;
 
     requestAnimationFrame(() => smoothScrolling());
   };

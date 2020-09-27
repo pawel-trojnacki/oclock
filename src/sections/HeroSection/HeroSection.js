@@ -10,9 +10,9 @@ import {
   HeroImage,
   ImageOverlay,
 } from './HeroSectionStyles';
-import Heading from '../Heading/Heading';
+import Heading from '../../components/Heading/Heading';
 import Img from '../../images/header-image.jpg';
-import Scroll from '../Scroll/Scroll';
+import Scroll from '../../components/Scroll/Scroll';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
 import useWindowSize from '../../hooks/useWindowSize';
 
@@ -34,7 +34,7 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    if (size.height >= 1024 && size.width > size.height) {
+    if (size.width >= 1024 && size.width > size.height) {
       gsap.fromTo(
         heroImg.current,
         { opacity: 1 },
@@ -51,7 +51,7 @@ const HeroSection = () => {
   }, [heroImg]);
 
   useEffect(() => {
-    if (size.height >= 1024 && size.width > size.heigt) {
+    if (size.width >= 1024 && size.width > size.height) {
       gsap.fromTo(
         heroTitle.current,
         { yPercent: 0 },
