@@ -14,6 +14,7 @@ import Heading from '../Heading/Heading';
 import Img from '../../images/header-image.jpg';
 import Scroll from '../Scroll/Scroll';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
+import useWindowSize from '../../hooks/useWindowSize';
 
 if (typeof window !== `undefined`) {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,6 +22,7 @@ if (typeof window !== `undefined`) {
 }
 
 const HeroSection = () => {
+  const size = useWindowSize();
   const heroImg = useRef(null);
   const heroTitle = useRef(null);
 
@@ -32,33 +34,37 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(
-      heroImg.current,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: heroImg.current,
-          ...scrollTriggerProperties,
-          start: 'center center',
-        },
-      }
-    );
+    if (size.height >= 1024 && size.width > size.height) {
+      gsap.fromTo(
+        heroImg.current,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          scrollTrigger: {
+            trigger: heroImg.current,
+            ...scrollTriggerProperties,
+            start: 'center center',
+          },
+        }
+      );
+    }
   }, [heroImg]);
 
   useEffect(() => {
-    gsap.fromTo(
-      heroTitle.current,
-      { yPercent: 0 },
-      {
-        yPercent: -50,
-        scrollTrigger: {
-          trigger: heroTitle.current,
-          ...scrollTriggerProperties,
-          start: 'center center',
-        },
-      }
-    );
+    if (size.height >= 1024 && size.width > size.heigt) {
+      gsap.fromTo(
+        heroTitle.current,
+        { yPercent: 0 },
+        {
+          yPercent: -50,
+          scrollTrigger: {
+            trigger: heroTitle.current,
+            ...scrollTriggerProperties,
+            start: 'center center',
+          },
+        }
+      );
+    }
   }, [heroTitle]);
 
   return (
