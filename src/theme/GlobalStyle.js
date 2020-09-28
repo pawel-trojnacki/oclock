@@ -1,5 +1,6 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import { isBrowser } from 'react-device-detect';
 
 const GlobalStyle = createGlobalStyle`
 ${normalize};
@@ -16,14 +17,20 @@ ${css`
     padding: 0;
     font-family: 'Cardo', serif;
     font-weight: 400;
-    overscroll-behavior-y: none;
     background-color: #000;
   }
 
-  html,
-  body {
-    height: 100%;
-  }
+  ${isBrowser &&
+  css`
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      overscroll-behavior-y: none;
+    }
+  `}
 
   ::selection {
     background-color: #444;

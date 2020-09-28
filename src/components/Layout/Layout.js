@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
+import { MobileView, BrowserView } from 'react-device-detect';
 
 import GlobalStyle from '../../theme/GlobalStyle';
 import { theme } from '../../theme/theme';
@@ -12,8 +13,14 @@ const Layout = ({ children, productPage, shopPage, horizontal }) => {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Navbar productPage={productPage} shopPage={shopPage} />
-        <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
+        <MobileView>
+          <Navbar productPage={productPage} shopPage={shopPage} />
+          {children}
+        </MobileView>
+        <BrowserView>
+          <Navbar productPage={productPage} shopPage={shopPage} />
+          <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
+        </BrowserView>
       </ThemeProvider>
     </>
   );
