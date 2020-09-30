@@ -7,6 +7,7 @@ import { PageWrapper, StyledScrollWrapper } from './ScrollWrapperStyles';
 const ScrollWrapper = ({ children, horizontal }) => {
   const size = useWindowSize();
   const page = useRef(null);
+  const scrollContainer = useRef(null);
 
   useEffect(() => {
     const scrollContainer = document.querySelector('.scroll-container');
@@ -29,23 +30,28 @@ const ScrollWrapper = ({ children, horizontal }) => {
   };
 
   const smoothScrolling = () => {
-    const scrollContainer = document.querySelector('.scroll-container');
+    // const scrollContainer = document.querySelector('.scroll-container');
 
     smoothConfigs.current = window.scrollY;
     smoothConfigs.previous +=
       (smoothConfigs.current - smoothConfigs.previous) * smoothConfigs.ease;
     smoothConfigs.smooth = Math.round(smoothConfigs.previous * 100) / 100;
 
-    scrollContainer.style.transform =
-      window.location.pathname === '/shop'
+    if (scrollContainer.current) {
+      scrollContainer.current.style.transform = horizontal
         ? `translateX(-${smoothConfigs.smooth}px)`
         : `translateY(-${smoothConfigs.smooth}px)`;
+    }
 
     requestAnimationFrame(() => smoothScrolling());
   };
   return (
     <PageWrapper ref={page} horizontal={horizontal}>
-      <StyledScrollWrapper className="scroll-container" horizontal={horizontal}>
+      <StyledScrollWrapper
+        ref={scrollContainer}
+        className="scroll-container"
+        horizontal={horizontal}
+      >
         {children}
       </StyledScrollWrapper>
     </PageWrapper>

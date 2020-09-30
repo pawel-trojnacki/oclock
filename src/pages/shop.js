@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import React, { useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import SEO from '../components/seo';
 import Layout from '../components/Layout/Layout';
+import ProductList from '../components/ProductList/ProductList';
 
 const ShopPage = () => {
   const { allStrapiProduct } = useStaticQuery(
@@ -17,8 +17,8 @@ const ShopPage = () => {
             price_in_cents
             image {
               childImageSharp {
-                fixed(width: 300) {
-                  ...GatsbyImageSharpFixed
+                fluid {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
@@ -28,31 +28,18 @@ const ShopPage = () => {
     `
   );
 
-  // const [, updateState] = useState();
-  // const forceUpdate = useCallback(() => updateState({}), []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.style.overflowY = 'hidden';
+    setTimeout(() => {
+      document.body.style.overflowY = 'scroll';
+    }, 200);
+  }, []);
 
-  // useEffect(() => {
-  //   forceUpdate();
-  // }, []);
   return (
     <Layout shopPage horizontal>
       <SEO title="Shop" />
-      <div>Shoppage</div>
-      <ul>
-        {allStrapiProduct.nodes.map(
-          ({ id, name, description, price_in_cents, image }) => {
-            return (
-              <li key={id}>
-                <h2>{name}</h2>
-                <p>{description}</p>
-                <p>{`$${(price_in_cents / 100).toFixed(2)}`}</p>
-                <Img fixed={image.childImageSharp.fixed} />
-                <Link to={`/products/${id}`}>See product</Link>
-              </li>
-            );
-          }
-        )}
-      </ul>
+      <ProductList products={allStrapiProduct.nodes} />
     </Layout>
   );
 };

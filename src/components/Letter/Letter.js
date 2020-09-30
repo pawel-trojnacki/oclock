@@ -1,15 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { LetterWrapper, StyledLetter } from './LetterStyles';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
-
-if (typeof window !== `undefined`) {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.core.globals('ScrollTrigger', ScrollTrigger);
-}
 
 const Letter = ({ letter, left }) => {
   const animeWrapper = useRef(null);

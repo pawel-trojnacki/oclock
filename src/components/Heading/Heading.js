@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const Heading = styled.h1`
   text-align: ${({ align }) => align || 'center'};
   font-size: ${({ theme }) => theme.xl};
-  text-transform: uppercase;
+  text-transform: ${({ lowercase }) => (lowercase ? 'none' : 'uppercase')};
   line-height: ${({ theme, tight }) =>
     tight ? theme.lineHeightS : theme.lineHeightM};
   color: ${({ theme, color }) => (color ? color : theme.white)};
@@ -15,13 +15,23 @@ const Heading = styled.h1`
     font-size: ${({ theme }) => theme.xxl};
   }
 
+  ${({ small }) =>
+    small &&
+    css`
+      font-size: ${({ theme }) => theme.s};
+
+      @media (min-width: 768px) {
+        font-size: ${({ theme }) => theme.l};
+      }
+    `}
+
   ${({ medium }) =>
     medium &&
     css`
-      font-size: ${({ theme }) => theme.xl};
+      font-size: ${({ theme }) => theme.l};
 
       @media (min-width: 768px) {
-        font-size: ${({ theme }) => theme.xxxl};
+        font-size: ${({ theme }) => theme.xl};
       }
     `}
 
@@ -31,7 +41,7 @@ const Heading = styled.h1`
       font-size: ${({ theme }) => theme.xxl};
 
       @media (min-width: 768px) {
-        font-size: ${({ theme }) => theme.xxxxl};
+        font-size: ${({ theme }) => theme.xxxl};
       }
     `}
 `;

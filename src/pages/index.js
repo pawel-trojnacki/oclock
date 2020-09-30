@@ -7,6 +7,9 @@ import SubHeader from '../sections/SubHeader/SubHeader';
 import Divider from '../components/Image/Divider';
 import DividerImg from '../images/divider.jpg';
 import AboutSection from '../sections/AboutSection/AboutSection';
+import Gallery from '../sections/Gallery/Gallery';
+import ContactSection from '../sections/ContactSection/ContactSection';
+import Footer from '../components/Footer/Footer';
 
 const IndexPage = () => (
   <Layout>
@@ -15,50 +18,9 @@ const IndexPage = () => (
     <SubHeader />
     <Divider src={DividerImg} alt="elegant watch" />
     <AboutSection />
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <h1>Slide</h1>
-    </div>
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <h1>Slide</h1>
-    </div>
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <h1>Slide</h1>
-    </div>
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <h1>Slide</h1>
-    </div>
+    <ContactSection />
+    <Gallery />
+    <Footer />
   </Layout>
 );
 

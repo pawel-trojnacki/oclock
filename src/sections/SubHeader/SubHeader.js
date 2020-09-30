@@ -11,7 +11,7 @@ const SubHeader = () => {
     <Wrapper>
       <InnerWrapper>
         <TextWrapper>
-          <Heading as="h2" tight medium align="left">
+          <Heading as="h2" tight align="left">
             <Fade cascade>Watches</Fade>
             <Fade cascade>of the</Fade>
             <Fade cascade>highest</Fade>

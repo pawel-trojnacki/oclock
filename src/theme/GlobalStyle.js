@@ -19,12 +19,16 @@ ${css`
     font-weight: 400;
     background-color: #000;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   ${isBrowser &&
   css`
     html,
     body {
       height: 100%;
+      scrollbar-width: none;
     }
 
     body {
@@ -34,6 +38,20 @@ ${css`
 
   ::selection {
     background-color: #444;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  img {
+    object-fit: cover;
+    object-position: center;
   }
 `}`;
 

@@ -5,7 +5,6 @@ export const ImageWrapper = styled.div`
   width: 40%;
   height: 60vw;
   margin: 0 0 0 20px;
-  transform: ${({ transform }) => transform || 'none'};
   @media (min-width: 768px) {
     height: 400px;
   }
@@ -47,8 +46,6 @@ export const InnerWrapper = styled.div`
 `;
 
 export const StyledResizeImage = styled.img`
-  object-fit: cover;
-  object-position: center;
   width: 100%;
   height: 100%;
 `;

@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import {
   ImageWrapper,
@@ -11,21 +10,7 @@ import {
 import Letter from '../Letter/Letter';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
 
-if (typeof window !== `undefined`) {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.core.globals('ScrollTrigger', ScrollTrigger);
-}
-
-const ResizeImage = ({
-  src,
-  alt,
-  left,
-  secondary,
-  withoutLetter,
-  letter,
-  last,
-  transform,
-}) => {
+const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
   const resizeImg = useRef(null);
 
   useEffect(() => {
@@ -44,7 +29,7 @@ const ResizeImage = ({
   }, [resizeImg]);
 
   return (
-    <ImageWrapper left={left} secondary={secondary} transform={transform}>
+    <ImageWrapper left={left} secondary={secondary}>
       <InnerWrapper>
         <StyledResizeImage src={src} alt={alt || 'image'} ref={resizeImg} />
       </InnerWrapper>

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'gatsby';
 
 import { CartContext } from '../../context/CartContext';
 import {
@@ -12,11 +11,9 @@ import {
   Quantity,
 } from './NavbarStyles';
 import Arrow from '../Icons/Arrow';
+import { aniLinkProperties } from '../../animations/aniLinkProperties';
 
 const Navbar = ({ productPage, shopPage }) => {
-  const transitionBg = '#1a1a1a';
-  const transitionDuration = 2;
-
   const { cart } = useContext(CartContext);
   let quantity = 0;
   if (cart && cart.length > 0) {
@@ -55,9 +52,9 @@ const Navbar = ({ productPage, shopPage }) => {
             <NavLink
               to="/shop"
               cover
-              bg={transitionBg}
+              bg={aniLinkProperties.bg}
               direction="right"
-              duration={transitionDuration}
+              duration={aniLinkProperties.duration}
             >
               <Arrow />
             </NavLink>
@@ -67,9 +64,9 @@ const Navbar = ({ productPage, shopPage }) => {
             <NavLink
               to="/"
               cover
-              bg={transitionBg}
+              bg={aniLinkProperties.bg}
               direction="down"
-              duration={transitionDuration}
+              duration={aniLinkProperties.duration}
             >
               O'clock
             </NavLink>
@@ -80,9 +77,9 @@ const Navbar = ({ productPage, shopPage }) => {
             <NavLink
               to="/"
               cover
-              bg={transitionBg}
+              bg={aniLinkProperties.bg}
               direction="down"
-              duration={transitionDuration}
+              duration={aniLinkProperties.duration}
             >
               Home
             </NavLink>
@@ -90,9 +87,9 @@ const Navbar = ({ productPage, shopPage }) => {
             <NavLink
               to="/shop"
               cover
-              bg={transitionBg}
-              direction="up"
-              duration={transitionDuration}
+              bg={aniLinkProperties.bg}
+              direction="left"
+              duration={aniLinkProperties.duration}
             >
               Shop
             </NavLink>
@@ -102,9 +99,9 @@ const Navbar = ({ productPage, shopPage }) => {
           <NavLink
             to="/cart"
             cover
-            bg={transitionBg}
+            bg={aniLinkProperties.bg}
             direction="left"
-            duration={transitionDuration}
+            duration={aniLinkProperties.duration}
           >
             Cart
             <Quantity>{quantity > 0 && quantity}</Quantity>

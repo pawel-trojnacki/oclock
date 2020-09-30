@@ -1,14 +1,28 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
-import { MobileView, BrowserView } from 'react-device-detect';
+import { MobileView, BrowserView, isIE } from 'react-device-detect';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import GlobalStyle from '../../theme/GlobalStyle';
 import { theme } from '../../theme/theme';
-import Navbar from './Navbar';
+import Navbar from '../Navbar/Navbar';
 import ScrollWrapper from '../ScrollWrapper/ScrollWrapper';
 
+if (typeof window !== `undefined`) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.core.globals('ScrollTrigger', ScrollTrigger);
+}
+
 const Layout = ({ children, productPage, shopPage, horizontal }) => {
+  if (isIE) {
+    return (
+      <div>
+        Internet Explorer is not supported. Download Chrome/Firefox/Opera.
+      </div>
+    );
+  }
   return (
     <>
       <GlobalStyle />

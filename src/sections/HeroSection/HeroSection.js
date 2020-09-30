@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 // import { useViewportScroll, useTransform } from 'framer-motion';
 import Fade from 'react-reveal/Fade';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import {
   HeroWrapper,
@@ -16,17 +15,13 @@ import Scroll from '../../components/Scroll/Scroll';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
 import useWindowSize from '../../hooks/useWindowSize';
 
-if (typeof window !== `undefined`) {
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.core.globals('ScrollTrigger', ScrollTrigger);
-}
-
 const HeroSection = () => {
   const size = useWindowSize();
   const heroImg = useRef(null);
   const heroTitle = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.body.style.overflowY = 'hidden';
     setTimeout(() => {
       document.body.style.overflowY = 'scroll';
@@ -48,7 +43,7 @@ const HeroSection = () => {
         }
       );
     }
-  }, [heroImg]);
+  }, [heroImg, size.width, size.height]);
 
   useEffect(() => {
     if (size.width >= 1024 && size.width > size.height) {
@@ -65,7 +60,7 @@ const HeroSection = () => {
         }
       );
     }
-  }, [heroTitle]);
+  }, [heroTitle, size.width, size.height]);
 
   return (
     <HeroWrapper>

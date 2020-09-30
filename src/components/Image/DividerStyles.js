@@ -5,8 +5,6 @@ export const DividerWrapper = styled.div`
 `;
 
 export const DividerImage = styled.img`
-  object-fit: cover;
-  object-position: center;
   height: 45vw;
   width: 100%;
 
