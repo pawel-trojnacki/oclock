@@ -11,6 +11,7 @@ ${css`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    outline: none;
   }
   body {
     margin: 0;
@@ -47,6 +48,11 @@ ${css`
   a {
     color: #fff;
     text-decoration: none;
+  }
+
+  a,
+  button {
+    outline: none;
   }
 
   img {

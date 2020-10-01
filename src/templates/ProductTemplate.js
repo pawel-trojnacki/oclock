@@ -1,10 +1,18 @@
 import React, { useContext } from 'react';
 import { graphql } from 'gatsby';
-import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
+import Img from 'gatsby-image';
 
 import { CartContext } from '../context/CartContext';
 import Layout from '../components/Layout/Layout';
+import {
+  ProductPageWrapper,
+  DetailsWrapper,
+  ProductTitle,
+  StyledParagraph,
+} from './ProductTemplateStyle';
+import Paragraph from '../components/Paragraph/Paragraph';
+import { ProductImage } from '../components/Image/ProductImage';
 
 const ProductTemplate = ({
   data: {
@@ -17,24 +25,32 @@ const ProductTemplate = ({
 
   return (
     <Layout productPage shopPage>
-      <h1>{name}</h1>
-      <p>{description}</p>
-      <p>{`$${(price_in_cents / 100).toFixed(2)}`}</p>
-      <Img fixed={image.childImageSharp.fixed} />
-      <button
-        onClick={() => {
-          addToCart({
-            strapiId,
-            id,
-            name,
-            description,
-            price_in_cents: numberPrice,
-            image,
-          });
-        }}
-      >
-        Add to cart
-      </button>
+      <ProductPageWrapper>
+        <DetailsWrapper>
+          <ProductTitle medium>{name}</ProductTitle>
+          <Paragraph margin="0" bold>{`$${(price_in_cents / 100).toFixed(
+            2
+          )}`}</Paragraph>
+          <StyledParagraph>{description}</StyledParagraph>
+          <button
+            onClick={() => {
+              addToCart({
+                strapiId,
+                id,
+                name,
+                description,
+                price_in_cents: numberPrice,
+                image,
+              });
+            }}
+          >
+            Add to cart
+          </button>
+        </DetailsWrapper>
+        <ProductImage>
+          <Img fluid={image.childImageSharp.fluid} />
+        </ProductImage>
+      </ProductPageWrapper>
     </Layout>
   );
 };
@@ -49,8 +65,8 @@ export const query = graphql`
       price_in_cents
       image {
         childImageSharp {
-          fixed(width: 700) {
-            ...GatsbyImageSharpFixed
+          fluid(maxWidth: 1000) {
+            ...GatsbyImageSharpFluid
           }
         }
       }

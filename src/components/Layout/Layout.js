@@ -1,7 +1,13 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
-import { MobileView, BrowserView, isIE } from 'react-device-detect';
+import {
+  MobileView,
+  BrowserView,
+  isIE,
+  isChrome,
+  isFirefox,
+} from 'react-device-detect';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,6 +15,7 @@ import GlobalStyle from '../../theme/GlobalStyle';
 import { theme } from '../../theme/theme';
 import Navbar from '../Navbar/Navbar';
 import ScrollWrapper from '../ScrollWrapper/ScrollWrapper';
+import Cursor from '../Cursor/Cursor';
 
 if (typeof window !== `undefined`) {
   gsap.registerPlugin(ScrollTrigger);
@@ -29,11 +36,15 @@ const Layout = ({ children, productPage, shopPage, horizontal }) => {
       <ThemeProvider theme={theme}>
         <MobileView>
           <Navbar productPage={productPage} shopPage={shopPage} />
-          {children}
+          <main>{children}</main>
         </MobileView>
         <BrowserView>
           <Navbar productPage={productPage} shopPage={shopPage} />
-          <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
+          <main>
+            <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
+          </main>
+          {(isChrome || isFirefox) && <Cursor />}
+          {/* <Cursor /> */}
         </BrowserView>
       </ThemeProvider>
     </>

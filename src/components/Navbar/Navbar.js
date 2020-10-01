@@ -7,9 +7,9 @@ import {
   Nav,
   ListItem,
   ListItemFirst,
-  NavLink,
   Quantity,
 } from './NavbarStyles';
+import NavLink from './NavLink';
 import Arrow from '../Icons/Arrow';
 import { aniLinkProperties } from '../../animations/aniLinkProperties';
 
@@ -39,7 +39,6 @@ const Navbar = ({ productPage, shopPage }) => {
       window.removeEventListener('scroll', handleScroll, false);
     };
   }, [lastY]);
-
   return (
     <NavWrapper
       animate={navHidden ? { opacity: 0, y: '-50px' } : { opacity: 1, y: 0 }}

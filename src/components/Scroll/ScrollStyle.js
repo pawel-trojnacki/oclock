@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-// import Paragraph from '../Parahraph/Paragraph';
 
 export const StyledScroll = styled(motion.div)`
   position: absolute;
@@ -8,15 +7,18 @@ export const StyledScroll = styled(motion.div)`
   left: 50%;
   transform: translateX(-50%);
 
-  @media (min-width: 768px) {
-    bottom: 3vh;
-  }
-
   ${({ horizontal }) =>
     horizontal &&
     css`
+      left: 40px;
+      bottom: 7vh;
+      transform: none;
       display: flex;
       align-items: center;
+
+      @media (min-width: 1200px) and (orientation: landscape) {
+        left: calc((100vw - 1160px) / 2);
+      }
     `}
 `;
 

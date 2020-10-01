@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import { isBrowser } from 'react-device-detect';
+
 import SEO from '../components/seo';
 import Layout from '../components/Layout/Layout';
 import ProductList from '../components/ProductList/ProductList';
+import Scroll from '../components/Scroll/Scroll';
 
 const ShopPage = () => {
   const { allStrapiProduct } = useStaticQuery(
@@ -39,6 +42,7 @@ const ShopPage = () => {
   return (
     <Layout shopPage horizontal>
       <SEO title="Shop" />
+      {isBrowser && <Scroll horizontal />}
       <ProductList products={allStrapiProduct.nodes} />
     </Layout>
   );

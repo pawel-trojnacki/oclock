@@ -27,7 +27,7 @@ export const ListItemFirst = styled(ListItem)`
   margin: 0 auto 0 0;
 `;
 
-export const NavLink = styled(AniLink)`
+export const StyledNavLink = styled(AniLink)`
   display: inline-block;
   text-decoration: none;
   color: ${({ theme }) => theme.white};
@@ -40,13 +40,18 @@ export const NavLink = styled(AniLink)`
     margin: 0 12px;
   }
 
-  :hover {
+  :hover,
+  :focus {
     color: ${({ theme }) => theme.grey};
     svg {
       path {
         fill: ${({ theme }) => theme.grey};
       }
     }
+  }
+
+  :focus {
+    outline: none;
   }
 
   transition: color 0.3s;

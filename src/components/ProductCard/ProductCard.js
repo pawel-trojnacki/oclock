@@ -12,9 +12,11 @@ import {
 import Heading from '../Heading/Heading';
 import { ImageWrapperBrowser, ImageWrapperMobile } from '../Image/ProductImage';
 import { aniLinkProperties } from '../../animations/aniLinkProperties';
+import { useCursorDispatch } from '../../context/CursorContext';
 
 const ProductCard = ({ product }) => {
   const { id, name, image } = product;
+  const dispatch = useCursorDispatch();
   return (
     <li>
       <MobileView>
@@ -47,7 +49,10 @@ const ProductCard = ({ product }) => {
             direction="left"
             duration={aniLinkProperties.duration}
           >
-            <ImageWrapperBrowser>
+            <ImageWrapperBrowser
+              onMouseEnter={() => dispatch({ type: 'ENLARGED' })}
+              onMouseLeave={() => dispatch({ type: 'INACTIVE' })}
+            >
               <Img fluid={image.childImageSharp.fluid} alt={name} />
             </ImageWrapperBrowser>
             <Heading as="h2" medium>

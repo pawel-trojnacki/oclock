@@ -7,6 +7,7 @@ const Paragraph = styled.p`
   margin: ${({ margin }) => margin || '10px'};
   text-align: ${({ align }) => align || 'left'};
   text-transform: ${({ uppercase }) => uppercase || 'none'};
+  font-weight: ${({ theme, bold }) => (bold ? theme.bold : theme.regular)};
 
   @media (min-width: 768px) {
     font-size: ${({ theme }) => theme.m};

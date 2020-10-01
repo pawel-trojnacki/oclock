@@ -30,8 +30,6 @@ const ScrollWrapper = ({ children, horizontal }) => {
   };
 
   const smoothScrolling = () => {
-    // const scrollContainer = document.querySelector('.scroll-container');
-
     smoothConfigs.current = window.scrollY;
     smoothConfigs.previous +=
       (smoothConfigs.current - smoothConfigs.previous) * smoothConfigs.ease;

@@ -1,5 +1,8 @@
 import React from 'react';
 import CartProvider from './src/context/CartContext';
+import CursorProvider from './src/context/CursorContext';
 export const wrapRootElement = ({ element }) => (
-  <CartProvider>{element}</CartProvider>
+  <CartProvider>
+    <CursorProvider>{element}</CursorProvider>
+  </CartProvider>
 );

@@ -16,7 +16,11 @@ const ProductList = ({ products }) => {
         </ProductListMobie>
       </MobileView>
       <BrowserView>
-        <ProductListBrowser>
+        <ProductListBrowser
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
           {products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
