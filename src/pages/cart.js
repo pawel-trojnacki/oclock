@@ -47,7 +47,7 @@ const CartPage = () => {
                     </button>
                   </p>
                   <p>{`$${price}`}</p>
-                  <Img fixed={product.image.childImageSharp.fixed} />
+                  <Img fluid={product.image.childImageSharp.fluid} />
                 </li>
               );
             })}

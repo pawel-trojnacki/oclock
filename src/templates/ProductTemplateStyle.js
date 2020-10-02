@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { isMobile } from 'react-device-detect';
+import { motion } from 'framer-motion';
 import Heading from '../components/Heading/Heading';
 import Paragraph from '../components/Paragraph/Paragraph';
 
@@ -18,7 +19,7 @@ export const ProductPageWrapper = styled.div`
   }
 `;
 
-export const DetailsWrapper = styled.div`
+export const DetailsWrapper = styled(motion.div)`
   padding: ${isMobile ? '0 30px' : '0 30px 200px'};
   @media (min-width: 600px) {
     padding: ${isMobile ? '0 10%' : '0 10% 200px'};
@@ -27,13 +28,11 @@ export const DetailsWrapper = styled.div`
     padding: ${isMobile ? '0 15%' : '0 15% 200px'};
   }
   @media (min-width: 1024px) and (orientation: landscape) {
-    /* margin-top: 12vh; */
     width: 50%;
     padding: 0 5%;
   }
 
   @media (min-width: 1280px) and (orientation: landscape) {
-    /* margin-top: 12vh; */
     padding: 0 7%;
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
@@ -12,7 +12,9 @@ import {
   StyledParagraph,
 } from './ProductTemplateStyle';
 import Paragraph from '../components/Paragraph/Paragraph';
+import Button from '../components/Button/Button';
 import { ProductImage } from '../components/Image/ProductImage';
+import Popup from '../components/Popup/Popup';
 
 const ProductTemplate = ({
   data: {
@@ -23,33 +25,43 @@ const ProductTemplate = ({
 
   const numberPrice = Math.round(price_in_cents);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    addToCart({
+      strapiId,
+      id,
+      name,
+      description,
+      price_in_cents: numberPrice,
+      image,
+    });
+    setIsOpen(true);
+  };
+
   return (
     <Layout productPage shopPage>
       <ProductPageWrapper>
-        <DetailsWrapper>
+        <DetailsWrapper
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
           <ProductTitle medium>{name}</ProductTitle>
           <Paragraph margin="0" bold>{`$${(price_in_cents / 100).toFixed(
             2
           )}`}</Paragraph>
           <StyledParagraph>{description}</StyledParagraph>
-          <button
-            onClick={() => {
-              addToCart({
-                strapiId,
-                id,
-                name,
-                description,
-                price_in_cents: numberPrice,
-                image,
-              });
-            }}
-          >
-            Add to cart
-          </button>
+          <Button clickFn={handleButtonClick}>Add to cart</Button>
         </DetailsWrapper>
-        <ProductImage>
+        <ProductImage
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
           <Img fluid={image.childImageSharp.fluid} />
         </ProductImage>
+        <Popup name={name} isOpen={isOpen} setIsOpen={setIsOpen} />
       </ProductPageWrapper>
     </Layout>
   );

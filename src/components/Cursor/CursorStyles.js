@@ -10,14 +10,14 @@ export const StyledCursor = styled.div`
   background-color: transparent;
   transform: translate(-50%, -50%);
   transition: all 0.2s ease-out;
-  transition-property: transform, width, height, border;
-  /* will-change: width, height, transform, border; */
+  transition-property: transform, width, height, border, opacity;
+  will-change: width, height, transform, border, opacity;
   pointer-events: none;
   mix-blend-mode: difference;
 
   &.hovered {
     background-color: ${({ theme }) => theme.white};
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(1.3);
   }
 
   &.enlarged {
@@ -37,19 +37,19 @@ export const StyledCursor = styled.div`
     color: ${({ theme }) => theme.black};
     font-size: 5px;
   }
-`;
 
-// export const CursorInner = styled.div`
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   width: 3px;
-//   height: 3px;
-//   border-radius: 100%;
-//   background-color: ${({ theme }) => theme.white};
-//   mix-blend-mode: difference;
-//   transition: all 0.2s ease-out;
-//   transition-property: width, height, border;
-//   will-change: width, height, transform, border;
-// `;
+  &.sticky {
+    /* transform: translate(0, 0); */
+    border-radius: 20px;
+    /* border: 2px solid ${({ theme }) => theme.white}; */
+    opacity: 0;
+
+    @media (min-width: 768px) {
+      border-radius: 26px;
+    }
+
+    @media (min-width: 1024px) {
+      border-radius: 32px;
+    }
+  }
+`;

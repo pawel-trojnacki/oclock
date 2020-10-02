@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { StyledCursor, CursorInner } from './CursorStyles';
+import { StyledCursor } from './CursorStyles';
 import { useCursorState } from '../../context/CursorContext';
 
 const Cursor = () => {
@@ -10,7 +10,8 @@ const Cursor = () => {
   });
 
   const [display, setDisplay] = useState(false);
-  const { cursorType } = useCursorState();
+  const { cursorType, top, left, width, height } = useCursorState();
+  const isSticky = cursorType === 'sticky';
 
   const handleMouseMove = e => {
     setPosition({
@@ -32,22 +33,24 @@ const Cursor = () => {
 
   return (
     <StyledCursor
-      style={{
-        top: position.y,
-        left: position.x,
-        display: display ? 'block' : 'none',
-      }}
+      sticky={isSticky}
+      style={
+        isSticky
+          ? {
+              display: display ? 'block' : 'none',
+              top: top + height / 2,
+              left: left + width / 2,
+              width: width + 2,
+              height: height + 2,
+            }
+          : {
+              display: display ? 'block' : 'none',
+              top: position.y,
+              left: position.x,
+            }
+      }
       className={cursorType}
     />
-    //     <StyledCursor
-    //     style={{
-    //       top: position.y,
-    //       left: position.x,
-    //       display: display ? 'block' : 'none',
-    //     }}
-    //   >
-    //     <CursorInner />
-    //   </StyledCursor>
   );
 };
 

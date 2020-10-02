@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { string } from 'prop-types';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -36,3 +37,8 @@ const Divider = ({ src, alt }) => {
 };
 
 export default Divider;
+
+Divider.propTypes = {
+  src: string,
+  alt: string,
+};

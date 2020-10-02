@@ -20,6 +20,15 @@ const cursorReducer = (state, action) => {
         ...state,
         cursorType: 'enlarged',
       };
+    case 'STICKY':
+      return {
+        ...state,
+        cursorType: 'sticky',
+        top: action.top,
+        left: action.left,
+        width: action.width,
+        height: action.height,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -28,6 +37,10 @@ const cursorReducer = (state, action) => {
 const CursorProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cursorReducer, {
     cursorType: '',
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
   });
   return (
     <CursorDispatchContext.Provider value={dispatch}>
