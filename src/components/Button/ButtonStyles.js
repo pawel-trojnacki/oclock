@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button`
   display: inline-block;
@@ -7,9 +7,9 @@ export const StyledButton = styled.button`
   border-radius: 20px;
   background-color: transparent;
   border: 2px solid ${({ theme }) => theme.white};
-  /* border: none; */
   color: ${({ theme }) => theme.white};
   text-transform: uppercase;
+  text-align: center;
   font-size: ${({ theme }) => theme.xs};
   font-weight: ${({ theme }) => theme.bold};
   letter-spacing: 1px;
@@ -33,4 +33,21 @@ export const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.white};
     color: ${({ theme }) => theme.black};
   }
+
+  ${({ secondary }) =>
+    secondary &&
+    css`
+      border-radius: 16px;
+      margin: 0;
+      padding: 2px 16px;
+
+      @media (min-width: 768px) {
+        padding: 4px 22px;
+        border-radius: 22px;
+      }
+
+      @media (min-width: 1024px) {
+        padding: 2px 22px;
+      }
+    `}
 `;

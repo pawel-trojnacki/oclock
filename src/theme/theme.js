@@ -14,6 +14,7 @@ export const theme = {
   dark: '#1a1a1a',
   beige: '#efeeea',
   grey: '#aaa',
+  red: '#fa755a',
   lineHeightS: 1.5,
   lineHeightM: 1.6,
   lineHeightL: 1.8,

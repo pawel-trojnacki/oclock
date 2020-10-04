@@ -26,6 +26,17 @@ const Paragraph = styled.p`
         font-size: ${({ theme }) => theme.l};
       }
     `}
+
+  ${({ error }) =>
+    error &&
+    css`
+      color: ${({ theme }) => theme.red};
+      text-align: center;
+      @media (min-width: 1024px) {
+        text-align: left;
+        margin: 10px auto 10px 0;
+      }
+    `}
 `;
 
 export default Paragraph;

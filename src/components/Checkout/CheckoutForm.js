@@ -7,26 +7,20 @@ import { CartContext } from '../../context/CartContext';
 import {
   orderFormElements,
   orderFormInitialState,
-} from '../../constatns/orderForm';
+} from '../../constants/orderForm';
 import { validateForm } from '../../utils/validateForm';
-
-const CARD_ELEMENT_OPTIONS = {
-  style: {
-    base: {
-      color: '#333',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '18px',
-      '::placeholder': {
-        color: '#555',
-      },
-    },
-    invalid: {
-      color: '#fa755a',
-      iconColor: '#fa755a',
-    },
-  },
-};
+import {
+  StyledForm,
+  FormField,
+  PaymentField,
+  PaymentWrapper,
+  BottomWrapper,
+} from './CheckoutFormStyles';
+import styleOptions from './styleOptions';
+import Heading from '../Heading/Heading';
+import Paragraph from '../Paragraph/Paragraph';
+import Button from '../Button/Button';
+import Message from '../Message/Message';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -109,63 +103,98 @@ const CheckoutForm = () => {
     forceUpdate();
   }, []);
 
+  if (success) {
+    return (
+      <Message
+        content="Order has been successfully processed."
+        link="/"
+        btnText="Homepage"
+      />
+    );
+  }
+
   return (
     <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <h3>Total: {`$${(total / 100).toFixed(2)}`}</h3>
-      )}
       {success ? (
-        <h2>Order has been successfully processed.</h2>
+        <Message
+          content="Order has been successfully processed."
+          link="/"
+          btnText="Homepage"
+        />
       ) : (
-        <form onSubmit={handleSubmit}>
-          {/* shipping fields */}
-          {orderFormElements.map(({ field, name, type }) => {
-            return (
-              <p key={field}>
-                <label htmlFor={field}>{name}</label>
-                {name !== 'country' && name !== 'state' && (
-                  <input
-                    type={type}
-                    name={field}
-                    id={field}
-                    value={form[field]}
-                    onChange={handleChange}
-                  />
-                )}
-                {name === 'country' && (
-                  <CountryDropdown
-                    id={field}
-                    name={field}
-                    value={form[field]}
-                    onChange={value => {
-                      setForm({ ...form, shipping_country: value });
-                      setError(null);
-                    }}
-                  />
-                )}
-                {name === 'state' && (
-                  <RegionDropdown
-                    id={field}
-                    name={field}
-                    defaultOptionLabel="Select state"
-                    country={form.shipping_country}
-                    value={form[field]}
-                    onChange={value => {
-                      setForm({ ...form, shipping_state: value });
-                      setError(null);
-                    }}
-                  />
-                )}
-              </p>
-            );
-          })}
-          {/* card field */}
-          <CardElement options={CARD_ELEMENT_OPTIONS} />
-          <button disabled={!stripe}>Confirm order</button>
-          {error && <h2>{error}</h2>}
-        </form>
+        <>
+          {loading && (
+            <Heading align="left" medium>
+              Loading...
+            </Heading>
+          )}
+          {!loading && (
+            <Heading align="left" medium>
+              Total price: {`$${(total / 100).toFixed(2)}`}
+            </Heading>
+          )}
+          <StyledForm
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            {orderFormElements.map(({ field, name, type }) => {
+              return (
+                <FormField key={field}>
+                  <label htmlFor={field}>{name}</label>
+                  {name !== 'country' && name !== 'state' && (
+                    <input
+                      type={type}
+                      name={field}
+                      id={field}
+                      value={form[field]}
+                      onChange={handleChange}
+                    />
+                  )}
+                  {name === 'country' && (
+                    <CountryDropdown
+                      id={field}
+                      name={field}
+                      value={form[field]}
+                      onChange={value => {
+                        setForm({ ...form, shipping_country: value });
+                        setError(null);
+                      }}
+                    />
+                  )}
+                  {name === 'state' && (
+                    <RegionDropdown
+                      id={field}
+                      name={field}
+                      defaultOptionLabel="Select state"
+                      country={form.shipping_country}
+                      value={form[field]}
+                      onChange={value => {
+                        setForm({ ...form, shipping_state: value });
+                        setError(null);
+                      }}
+                    />
+                  )}
+                </FormField>
+              );
+            })}
+            <PaymentField>
+              <label>Payment</label>
+              <PaymentWrapper>
+                <CardElement options={styleOptions} />
+              </PaymentWrapper>
+            </PaymentField>
+            <BottomWrapper>
+              {error && (
+                <Paragraph big bold error>
+                  {error}
+                </Paragraph>
+              )}
+              <Button disabled={!stripe}>Confirm order</Button>
+            </BottomWrapper>
+          </StyledForm>
+        </>
       )}
     </div>
   );

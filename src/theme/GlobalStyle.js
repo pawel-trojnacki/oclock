@@ -59,6 +59,41 @@ ${css`
     object-fit: cover;
     object-position: center;
   }
+
+  label {
+    display: block;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  input,
+  select {
+    width: 100%;
+    border-radius: 0;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    padding: 4px 12px;
+    margin-top: 6px;
+    line-height: 1.4;
+
+    @media (min-width: 768px) {
+      padding: 8px 14px;
+    }
+    @media (min-width: 1024px) {
+      width: 350px;
+    }
+  }
+
+  input:focus,
+  select:focus {
+    background-color: #222;
+  }
+
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 `}`;
 
 export default GlobalStyle;

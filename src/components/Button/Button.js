@@ -6,7 +6,7 @@ import { StyledButton } from './ButtonStyles';
 import { useCursorDispatch } from '../../context/CursorContext';
 import { aniLinkProperties } from '../../animations/aniLinkProperties';
 
-const Button = ({ children, clickFn, link }) => {
+const Button = ({ children, clickFn, link, secondary }) => {
   const dispatch = useCursorDispatch();
   const handleHover = e => {
     dispatch({
@@ -19,6 +19,7 @@ const Button = ({ children, clickFn, link }) => {
   };
   return (
     <StyledButton
+      secondary={secondary}
       onMouseEnter={handleHover}
       onMouseLeave={() => dispatch({ type: 'INACTIVE' })}
       onClick={clickFn || null}
@@ -36,10 +37,11 @@ const Button = ({ children, clickFn, link }) => {
 
 export default Button;
 
-const { oneOfType, arrayOf, node, string, func } = PropTypes;
+const { oneOfType, arrayOf, node, string, func, bool } = PropTypes;
 
 Button.propTypes = {
   children: oneOfType([arrayOf(node), node]),
   clickFn: func,
   link: string,
+  secondary: bool,
 };

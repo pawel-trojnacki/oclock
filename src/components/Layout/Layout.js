@@ -7,6 +7,7 @@ import {
   isIE,
   isChrome,
   isFirefox,
+  isOpera,
 } from 'react-device-detect';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -43,7 +44,7 @@ const Layout = ({ children, productPage, shopPage, horizontal }) => {
           <main>
             <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
           </main>
-          {(isChrome || isFirefox) && <Cursor />}
+          {(isChrome || isFirefox || isOpera) && <Cursor />}
           {/* <Cursor /> */}
         </BrowserView>
       </ThemeProvider>

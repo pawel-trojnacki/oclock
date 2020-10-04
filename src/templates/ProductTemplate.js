@@ -5,6 +5,7 @@ import Img from 'gatsby-image';
 
 import { CartContext } from '../context/CartContext';
 import Layout from '../components/Layout/Layout';
+import SEO from '../components/seo';
 import {
   ProductPageWrapper,
   DetailsWrapper,
@@ -41,6 +42,7 @@ const ProductTemplate = ({
 
   return (
     <Layout productPage shopPage>
+      <SEO title={name} />
       <ProductPageWrapper>
         <DetailsWrapper
           initial={{ opacity: 0 }}

@@ -8,7 +8,7 @@ import {
 } from './ContactSectionStyles';
 import Heading from '../../components/Heading/Heading';
 import Paragraph from '../../components/Paragraph/Paragraph';
-import { contactDetails } from '../../constatns/contactDetails';
+import { contactDetails } from '../../constants/contactDetails';
 
 const ContactSection = () => {
   return (
