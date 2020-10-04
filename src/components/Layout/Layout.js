@@ -45,7 +45,6 @@ const Layout = ({ children, productPage, shopPage, horizontal }) => {
             <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
           </main>
           {(isChrome || isFirefox || isOpera) && <Cursor />}
-          {/* <Cursor /> */}
         </BrowserView>
       </ThemeProvider>
     </>
