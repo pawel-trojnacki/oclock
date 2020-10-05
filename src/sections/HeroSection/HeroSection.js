@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-// import { useViewportScroll, useTransform } from 'framer-motion';
 import Fade from 'react-reveal/Fade';
+import { isBrowser } from 'react-device-detect';
 import gsap from 'gsap';
 
 import {
@@ -29,24 +29,22 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    if (size.width >= 1024 && size.width > size.height) {
-      gsap.fromTo(
-        heroImg.current,
-        { opacity: 1 },
-        {
-          opacity: 0,
-          scrollTrigger: {
-            trigger: heroImg.current,
-            ...scrollTriggerProperties,
-            start: 'center center',
-          },
-        }
-      );
-    }
-  }, [heroImg, size.width, size.height]);
+    gsap.fromTo(
+      heroImg.current,
+      { opacity: 1 },
+      {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: heroImg.current,
+          ...scrollTriggerProperties,
+          start: 'center center',
+        },
+      }
+    );
+  }, [heroImg]);
 
   useEffect(() => {
-    if (size.width >= 1024 && size.width > size.height) {
+    if (isBrowser) {
       gsap.fromTo(
         heroTitle.current,
         { yPercent: 0 },
@@ -60,7 +58,7 @@ const HeroSection = () => {
         }
       );
     }
-  }, [heroTitle, size.width, size.height]);
+  }, [heroTitle]);
 
   return (
     <HeroWrapper>

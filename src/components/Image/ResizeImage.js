@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { isBrowser } from 'react-device-detect';
 import gsap from 'gsap';
 
 import {
@@ -14,18 +15,20 @@ const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
   const resizeImg = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      resizeImg.current,
-      { scale: 1.5, xPercent: 25 },
-      {
-        scale: 1,
-        xPercent: 0,
-        scrollTrigger: {
-          trigger: resizeImg.current,
-          ...scrollTriggerProperties,
-        },
-      }
-    );
+    if (isBrowser) {
+      gsap.fromTo(
+        resizeImg.current,
+        { scale: 1.5, xPercent: 25 },
+        {
+          scale: 1,
+          xPercent: 0,
+          scrollTrigger: {
+            trigger: resizeImg.current,
+            ...scrollTriggerProperties,
+          },
+        }
+      );
+    }
   }, [resizeImg]);
 
   return (

@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { isOpera } from 'react-device-detect';
+import styled from 'styled-components';
 
 export const StyledCursor = styled.div`
   position: fixed;
@@ -18,14 +17,15 @@ export const StyledCursor = styled.div`
 
   &.hovered {
     background-color: ${({ theme }) => theme.white};
-    transform: translate(-50%, -50%) scale(1.3);
+    width: 46px;
+    height: 46px;
   }
 
   &.enlarged {
     background-color: ${({ theme }) => theme.white};
-    transform: ${isOpera
-      ? 'translate(-50%, -50%)'
-      : 'translate(-50%, -100%) scale(2.8)'};
+    transform: translate(-50%, -90%);
+    width: 100px;
+    height: 100px;
     mix-blend-mode: normal;
   }
 
@@ -33,16 +33,12 @@ export const StyledCursor = styled.div`
     display: block;
     text-align: center;
     content: 'VIEW PRODUCT';
-    ${isOpera &&
-    css`
-      content: '';
-    `}
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: ${({ theme }) => theme.black};
-    font-size: 5px;
+    font-size: 13px;
   }
 
   &.sticky {

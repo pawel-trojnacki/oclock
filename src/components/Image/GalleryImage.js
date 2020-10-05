@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { isBrowser } from 'react-device-detect';
 import gsap from 'gsap';
 
 import { StyledGalleryImage } from './GalleryImageStyles';
@@ -9,17 +10,19 @@ const GalleryImage = ({ src, alt, from, to }) => {
   const moveImg = useRef(null);
   useEffect(() => {
     const animationTrigger = document.querySelector('.gallery-container');
-    gsap.fromTo(
-      moveImg.current,
-      { yPercent: from },
-      {
-        yPercent: to,
-        scrollTrigger: {
-          trigger: animationTrigger,
-          ...scrollTriggerProperties,
-        },
-      }
-    );
+    if (isBrowser) {
+      gsap.fromTo(
+        moveImg.current,
+        { yPercent: from },
+        {
+          yPercent: to,
+          scrollTrigger: {
+            trigger: animationTrigger,
+            ...scrollTriggerProperties,
+          },
+        }
+      );
+    }
   }, [moveImg]);
 
   return <StyledGalleryImage ref={moveImg} src={src} alt={alt || 'image'} />;
