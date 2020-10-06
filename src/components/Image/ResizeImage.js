@@ -9,7 +9,10 @@ import {
   StyledResizeImage,
 } from './ResizeImageStyle';
 import Letter from '../Letter/Letter';
-import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
+import {
+  scrollTriggerProperties,
+  scrollTriggerPropertiesMobile,
+} from '../../animations/scrollTriggerProperties';
 
 const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
   const resizeImg = useRef(null);
@@ -25,6 +28,18 @@ const ResizeImage = ({ src, alt, left, secondary, withoutLetter, letter }) => {
           scrollTrigger: {
             trigger: resizeImg.current,
             ...scrollTriggerProperties,
+          },
+        }
+      );
+    } else {
+      gsap.fromTo(
+        resizeImg.current,
+        { scale: 1.2 },
+        {
+          scale: 1,
+          scrollTrigger: {
+            trigger: resizeImg.current,
+            ...scrollTriggerPropertiesMobile,
           },
         }
       );

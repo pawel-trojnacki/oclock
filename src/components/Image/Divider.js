@@ -4,7 +4,10 @@ import { isBrowser } from 'react-device-detect';
 import gsap from 'gsap';
 
 import { DividerWrapper, DividerImage } from './DividerStyles';
-import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
+import {
+  scrollTriggerProperties,
+  scrollTriggerPropertiesMobile,
+} from '../../animations/scrollTriggerProperties';
 
 const Divider = ({ src, alt }) => {
   const animeDivider = useRef(null);
@@ -20,6 +23,18 @@ const Divider = ({ src, alt }) => {
           scrollTrigger: {
             trigger: animeDivider.current,
             ...scrollTriggerProperties,
+          },
+        }
+      );
+    } else {
+      gsap.fromTo(
+        animeDivider.current,
+        { scale: 1.2 },
+        {
+          scale: 1,
+          scrollTrigger: {
+            trigger: animeDivider.current,
+            ...scrollTriggerPropertiesMobile,
           },
         }
       );

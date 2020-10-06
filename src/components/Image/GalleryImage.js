@@ -22,6 +22,17 @@ const GalleryImage = ({ src, alt, from, to }) => {
           },
         }
       );
+    } else {
+      gsap.fromTo(
+        moveImg.current,
+        { yPercent: from },
+        {
+          yPercent: to,
+          scrollTrigger: {
+            trigger: animationTrigger,
+          },
+        }
+      );
     }
   }, [moveImg]);
 

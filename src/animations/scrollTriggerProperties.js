@@ -4,3 +4,10 @@ export const scrollTriggerProperties = {
   scrub: 2,
   toggleActions: 'restart pause reverse pause',
 };
+
+export const scrollTriggerPropertiesMobile = {
+  start: 'top bottom',
+  end: 'center center',
+  scrub: 1,
+  toggleActions: 'restart pause reverse pause',
+};
