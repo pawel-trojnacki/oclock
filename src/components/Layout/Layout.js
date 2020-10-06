@@ -41,9 +41,9 @@ const Layout = ({ children, productPage, shopPage, horizontal }) => {
         </MobileView>
         <BrowserView>
           <Navbar productPage={productPage} shopPage={shopPage} />
-          <main>
-            <ScrollWrapper horizontal={horizontal}>{children}</ScrollWrapper>
-          </main>
+          <ScrollWrapper horizontal={horizontal}>
+            <main>{children}</main>
+          </ScrollWrapper>
           {(isChrome || isFirefox || isOpera) && <Cursor />}
         </BrowserView>
       </ThemeProvider>

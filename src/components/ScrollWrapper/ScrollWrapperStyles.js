@@ -20,8 +20,6 @@ export const PageWrapper = styled.div`
 `;
 
 export const StyledScrollWrapper = styled.div`
-  /* pointer-events: none; */
-
   ${({ horizontal }) =>
     horizontal &&
     css`
