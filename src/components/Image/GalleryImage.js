@@ -33,7 +33,7 @@ const GalleryImage = ({ src, alt, from, to }) => {
           yPercent: to,
           scrollTrigger: {
             trigger: animationTrigger,
-            scrollTriggerPropertiesMobile,
+            ...scrollTriggerPropertiesMobile,
           },
         }
       );
