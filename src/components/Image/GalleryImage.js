@@ -4,7 +4,10 @@ import { isBrowser } from 'react-device-detect';
 import gsap from 'gsap';
 
 import { StyledGalleryImage } from './GalleryImageStyles';
-import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
+import {
+  scrollTriggerProperties,
+  scrollTriggerPropertiesMobile,
+} from '../../animations/scrollTriggerProperties';
 
 const GalleryImage = ({ src, alt, from, to }) => {
   const moveImg = useRef(null);
@@ -30,6 +33,7 @@ const GalleryImage = ({ src, alt, from, to }) => {
           yPercent: to,
           scrollTrigger: {
             trigger: animationTrigger,
+            scrollTriggerPropertiesMobile,
           },
         }
       );
