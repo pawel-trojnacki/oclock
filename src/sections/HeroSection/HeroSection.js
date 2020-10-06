@@ -13,10 +13,8 @@ import Heading from '../../components/Heading/Heading';
 import Img from '../../images/header-image.jpg';
 import Scroll from '../../components/Scroll/Scroll';
 import { scrollTriggerProperties } from '../../animations/scrollTriggerProperties';
-import useWindowSize from '../../hooks/useWindowSize';
 
 const HeroSection = () => {
-  const size = useWindowSize();
   const heroImg = useRef(null);
   const heroTitle = useRef(null);
 
@@ -29,18 +27,20 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(
-      heroImg.current,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: heroImg.current,
-          ...scrollTriggerProperties,
-          start: 'center center',
-        },
-      }
-    );
+    if (isBrowser) {
+      gsap.fromTo(
+        heroImg.current,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          scrollTrigger: {
+            trigger: heroImg.current,
+            ...scrollTriggerProperties,
+            start: 'center center',
+          },
+        }
+      );
+    }
   }, [heroImg]);
 
   useEffect(() => {
@@ -70,7 +70,6 @@ const HeroSection = () => {
           initial={{ x: '-20%' }}
           animate={{ x: 0 }}
           transition={{ delay: 1.2, duration: 0.6, ease: 'easeInOut' }}
-          // style={{ scale: scaleSize }}
         />
         <ImageOverlay
           animate={{ scaleX: 0 }}
